@@ -1,5 +1,8 @@
 # &#127775; ASCII Learner &#127775;
 
+
+[![ascii-learner](https://github.com/Dantescur/ascii-learner/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/Dantescur/ascii-learner/actions/workflows/npm-publish.yml)
+
 ASCII Learner is a command-line tool for learning and practicing ASCII characters. It allows you to practice recognizing and entering ASCII characters, including letters and special symbols. &#127919;&#128293;
 
 ## Instalation
