@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import chalk from 'chalk';
-import inquirer from 'inquirer';
-import { Command } from 'commander';
+import chalk from "chalk";
+import inquirer from "inquirer";
+import { Command } from "commander";
 
 const program = new Command();
 
@@ -11,23 +11,24 @@ function random(min = 0, max = 10) {
 }
 
 function clearScreen() {
-  if (process.platform === 'win32') {
-    process.stdout.write('\x1Bc');
+  if (process.platform === "win32") {
+    process.stdout.write("\x1Bc");
   } else {
-    console.clear();
+    // Unix y Mac
+    process.stdout.write("\x1B[2J\x1B[3J\x1B[H");
   }
 }
 
 program
-  .version('1.0.0')
-  .description('ASCII Learner - Aprende y Practica ASCII');
+  .version("1.0.0")
+  .description("ASCII Learner - Aprende y Practica ASCII");
 
 program
-  .command('practice')
-  .description('Comienza la practica de ASCII')
+  .command("practice")
+  .description("Comienza la practica de ASCII")
   .action(async () => {
     clearScreen();
-    console.log(chalk.bold('Bienvenido a ASCII Learner - Modo Practica'));
+    console.log(chalk.bold("Bienvenido a ASCII Learner - Modo Practica"));
 
     let exitPractice = false;
 
@@ -42,17 +43,17 @@ program
         await inquirer
           .prompt([
             {
-              type: 'input',
-              name: 'userInput',
+              type: "input",
+              name: "userInput",
               message: question,
             },
           ])
           .then((answers) => {
             const userCharCode = answers.userInput.charCodeAt(0);
             if (userCharCode === ascii) {
-              console.log(chalk.green('Felicidades!! Coreecto.'));
+              console.log(chalk.green("Felicidades!! Coreecto."));
             } else {
-              console.log(chalk.red('Incorrecto. Intenta de nuevo.'));
+              console.log(chalk.red("Incorrecto. Intenta de nuevo."));
             }
           });
       } else if (trainType === 2) {
@@ -71,17 +72,17 @@ program
         await inquirer
           .prompt([
             {
-              type: 'input',
-              name: 'userInput',
+              type: "input",
+              name: "userInput",
               message: question,
             },
           ])
           .then((answers) => {
             const userCharCode = answers.userInput.charCodeAt(0);
             if (userCharCode === ascii) {
-              console.log(chalk.green('Felicidades! Correcto.'));
+              console.log(chalk.green("Felicidades! Correcto."));
             } else {
-              console.log(chalk.red('Incorrecto. Intenta de nuevo.'));
+              console.log(chalk.red("Incorrecto. Intenta de nuevo."));
             }
           });
       }
@@ -89,9 +90,9 @@ program
       await inquirer
         .prompt([
           {
-            type: 'confirm',
-            name: 'continuePractice',
-            message: 'Quieres continuar practicando?',
+            type: "confirm",
+            name: "continuePractice",
+            message: "Quieres continuar practicando?",
             default: true,
           },
         ])
@@ -102,28 +103,28 @@ program
   });
 
 program
-  .command('show')
-  .description('Mostrar caracteres ASCII')
+  .command("show")
+  .description("Mostrar caracteres ASCII")
   .addCommand(
-    new Command('letters')
-      .description('Muestra caracteres ASCII para letras')
+    new Command("letters")
+      .description("Muestra caracteres ASCII para letras")
       .action(() => {
         clearScreen();
-        console.log(chalk.bold('Caracteres ASCII para letras:'));
+        console.log(chalk.bold("Caracteres ASCII para letras:"));
         for (let i = 65; i <= 90; i++) {
           console.log(`${i}\t${String.fromCharCode(i)}`);
         }
         for (let i = 97; i <= 122; i++) {
           console.log(`${i}\t${String.fromCharCode(i)}`);
         }
-      })
+      }),
   )
   .addCommand(
-    new Command('special')
-      .description('Muestra caracteres especiales ASCII')
+    new Command("special")
+      .description("Muestra caracteres especiales ASCII")
       .action(() => {
         clearScreen();
-        console.log(chalk.bold('Caracteres ASCII Especiales:'));
+        console.log(chalk.bold("Caracteres ASCII Especiales:"));
         for (let i = 33; i <= 47; i++) {
           console.log(`${i}\t${String.fromCharCode(i)}`);
         }
@@ -133,7 +134,7 @@ program
         for (let i = 91; i <= 96; i++) {
           console.log(`${i}\t${String.fromCharCode(i)}`);
         }
-      })
+      }),
   );
 
 program.parse(process.argv);
